@@ -1,7 +1,11 @@
 #pragma once
+
+#include <vector>
+
 #include "StateMachineMngr.h"
-#include "Game/Entities/Entity.h"
 #include "Game/Entities/Player.h"
+#include "Game/Entities/Shoot.h"
+#include "Game/Entities/Enemy.h"
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -26,6 +30,8 @@ private:
 	ScreenGameplayState(const ScreenGameplayState& other);
 	ScreenGameplayState& operator= (const ScreenGameplayState& other);
 
+	void CheckCollisions();
+
 	void EvaluateInput();
 	
 	void DebugOptions();
@@ -38,5 +44,12 @@ private:
 	bool debug_floor = false;
 	bool debug_stairs = false;
 
+	int shootCooldown = 0;
+
 	Texture2D landscape;
+	Rectangle bounds;
+	
+	Player* player = nullptr;
+	std::vector<Entity*> entities;
+	bool matrix[CollisionType::MAX][CollisionType::MAX];
 };

@@ -37,6 +37,7 @@ public:
 
 	void IncreaseScore(int newValue) { score += newValue; }
 	void DecreaseScore(int newValue) { score -= newValue; }
+	void DecreaseLifes() { lifes--; }
 
 
 	static GameManager& GetGameManager();
@@ -58,6 +59,7 @@ private:
 	int transToScreen = -1;
 
 	int score = 0;
+	int lifes = 0;
 	int seconds = 0;
 
 private:

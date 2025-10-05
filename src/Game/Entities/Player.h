@@ -2,21 +2,20 @@
 
 #include "Entity.h"
 
-class Player : public Entity
-{
+
+class Player : public Entity {
 public:
+	Player();
+	Player(Vector2 position, Rectangle limits);
+	~Player();
 	void Init();
 	void Update();
 	void Draw();
-	void Unload();
-
-	void Move();
+	void HasCollided(CollisionType type);
 
 private:
-
-	Vector2 pos;
+	Rectangle bounds;
 	Texture2D sprite;
-	CollisionType colType = PLAYER;
 
 	float vel = 5;
 };

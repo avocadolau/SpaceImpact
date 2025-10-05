@@ -577,8 +577,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="..\..\src\Game\Entities\Enemy.h" />
     <ClInclude Include="..\..\src\Game\Entities\Entity.h" />
     <ClInclude Include="..\..\src\Game\Entities\Player.h" />
+    <ClInclude Include="..\..\src\Game\Entities\Shoot.h" />
     <ClInclude Include="..\..\src\Game\GlobalGameDefines.h" />
     <ClInclude Include="..\..\src\Game\Managers\GameManager.h" />
     <ClInclude Include="..\..\src\Menu\Screen.h" />
@@ -601,8 +603,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Game\Entities\Enemy.cpp" />
     <ClCompile Include="..\..\src\Game\Entities\Entity.cpp" />
     <ClCompile Include="..\..\src\Game\Entities\Player.cpp" />
+    <ClCompile Include="..\..\src\Game\Entities\Shoot.cpp" />
     <ClCompile Include="..\..\src\Game\GlobalGameDefines.cpp" />
     <ClCompile Include="..\..\src\Game\Managers\GameManager.cpp" />
     <ClCompile Include="..\..\src\Menu\Screen.cpp" />

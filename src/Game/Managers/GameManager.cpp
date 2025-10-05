@@ -82,6 +82,8 @@ void GameManager::UpdateFrame(float deltaTime)
                     {
                         TransitionToScreen((int)ScreenState::GAMEPLAY);
                         ScreenState = &ScreenGameplayState::getInstance();
+                        score = 0;
+                        lifes = 3;
                     }
                 }
 
