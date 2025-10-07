@@ -21,26 +21,30 @@ void Enemy::Init() {
 	sprite = LoadTextureFromImage(image);
 	UnloadImage(image);
 
+	sound= GameManager::ENEMY_IMPACT;
+
 	rec.width = sprite.width;
 	rec.height = sprite.height;
 
 	if (enemyType == ENEMY_1) {
-		lifes = 1;
+		lives = 1;
 		points = 40;
 	}
 	else if (enemyType == ENEMY_2) {
-		lifes = 2;
+		lives = 2;
 		points = 50;
 	}
 	else if (enemyType == ENEMY_3) {
-		lifes = 3;
+		lives = 3;
 		points = 60;
 	}
+
+	vel = 4;
 }
 
 void Enemy::Update() {
 	rec.x -= vel;
-	if (rec.x < 0) active = false;
+	if (rec.x < -rec.width) active = false;
 }
 
 void Enemy::Draw() {
@@ -49,11 +53,12 @@ void Enemy::Draw() {
 
 void Enemy::HasCollided(CollisionType type) {
 	if (type == PROJECTILE) {
-		lifes--;
-		if (lifes <= 0) {
+		lives--;
+		if (lives <= 0) {
 			GameManager& GameInst = GameManager::GetGameManager();
 			GameInst.IncreaseScore(points);
 			active = false;
+			GameManager::GetGameManager().Play(sound);
 		}
 	}
 }
@@ -74,13 +79,24 @@ void Boss::Init() {
 	sprite = LoadTextureFromImage(image);
 	UnloadImage(image);
 
+	sound = GameManager::BOSS_IMPACT;
+
 	rec.width = sprite.width;
 	rec.height = sprite.height;
 
-	lifes = 5;
+	lives = 5;
 	points = 100;
+	vel = 3;
 }
 
 void Boss::Update() {
-	// to do
+	if (!active) shoot = false;
+	if (rec.x > GetScreenWidth() / 2 + rec.width) {
+		rec.x -= vel;
+	}
+	else {
+		shoot = true;
+		rec.y += vel;
+		if (rec.y <= 20 || rec.y >= GetScreenHeight() - rec.height-20) vel *= -1;
+	}
 }

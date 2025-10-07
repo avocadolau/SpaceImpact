@@ -5,8 +5,13 @@
 
 class Shoot : public Entity {
 public:
+	enum ShootDirection {
+		R,
+		L
+	};
+
 	Shoot();
-	Shoot(Vector2 position);
+	Shoot(Vector2 position, ShootDirection direction);
 	~Shoot();
 	void Init();
 	void Update();

@@ -2,20 +2,27 @@
 
 #include "raylib.h"
 
-#include "Menu/StateMachineMngr.h" 
+#include "Menu/StateMachineMngr.h"
 
 using namespace std;
 
 enum InportedFontType {
-	pacman,
-	pixel
+	PACMAN,
+	PIXEL
 };
+
 
 class GameManager
 {
-private:
-
-
+public:
+	enum Sounds {
+	BOSS_IMPACT,
+	ENEMY_IMPACT,
+	PLAYER_IMPACT,
+	SHOOT,
+	START_GAME,
+	MAX
+	};
 public:
 	GameManager();
 
@@ -37,8 +44,11 @@ public:
 
 	void IncreaseScore(int newValue) { score += newValue; }
 	void DecreaseScore(int newValue) { score -= newValue; }
-	void DecreaseLifes() { lifes--; }
+	void DecreaseLifes() { lives--; }
+	int GetLives() { return lives; }
 
+	void Play(Sounds sound);
+	Sound* GetSound(Sounds sound) { return &soundsImported[sound]; }
 
 	static GameManager& GetGameManager();
 
@@ -59,7 +69,7 @@ private:
 	int transToScreen = -1;
 
 	int score = 0;
-	int lifes = 0;
+	int lives = 0;
 	int seconds = 0;
 
 private:
@@ -67,12 +77,9 @@ private:
 	static GameManager *GameMngr;
 
 	//------------
-
 	Font font = { 0 };
 	Font pixelFont = { 0 };
-	Music music = { 0 };
-	Sound fxCoin = { 0 };
+	Sound soundsImported[Sounds::MAX] = { { 0 } };
 
 	StateMachineMngr* ScreenState;
-
 };

@@ -6,7 +6,7 @@
 class Player : public Entity {
 public:
 	Player();
-	Player(Vector2 position, Rectangle limits);
+	Player(Vector2 position);
 	~Player();
 	void Init();
 	void Update();
@@ -14,8 +14,7 @@ public:
 	void HasCollided(CollisionType type);
 
 private:
-	Rectangle bounds;
 	Texture2D sprite;
-
+	int damageCooldown = 0;
 	float vel = 5;
 };

@@ -9,8 +9,10 @@
 
 namespace GameGlobalVar
 {
-	const int screenWidth = 1280;
-	const int screenHeight = 800;
+	//const int screenWidth = 1280;
+	//const int screenHeight = 800;
+	const int screenWidth = 980;
+	const int screenHeight = 660;
 
 	const int gravity = 400;
 }

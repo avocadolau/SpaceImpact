@@ -12,9 +12,12 @@ Shoot::Shoot() {
 
 }
 
-Shoot::Shoot(Vector2 position) {
+Shoot::Shoot(Vector2 position, ShootDirection direction) {
 	rec.x = position.x;
 	rec.y = position.y;
+	if (direction == L) {
+		vel *= -0.75;
+	}
 	Init();
 }
 
@@ -23,13 +26,13 @@ Shoot::~Shoot() {
 
 void Shoot::Init() {
 	rec.width = 40;
-	rec.height = 10;
+	rec.height = 8;
 	colType = PROJECTILE;
 }
 
 void Shoot::Update() {
 	rec.x += vel;
-	if (rec.x > GetScreenWidth()) active = false;
+	if (rec.x > GetScreenWidth() || rec.x < -rec.width) active = false;
 }
 
 void Shoot::Draw() {

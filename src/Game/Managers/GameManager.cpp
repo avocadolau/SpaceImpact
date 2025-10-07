@@ -37,16 +37,23 @@ void GameManager::InitGame()
     font = LoadFont("resources/Font/PacManFont.ttf");
     pixelFont = LoadFont("resources/Fonts/Pixeled.ttf");
 
+    // SOUNDS
+    InitAudioDevice();
+    soundsImported[BOSS_IMPACT] = LoadSound("resources/Sounds/BossImpact.mp3");
+    soundsImported[ENEMY_IMPACT] = LoadSound("resources/Sounds/EnemyImpact.mp3");
+    soundsImported[PLAYER_IMPACT] = LoadSound("resources/Sounds/PlayerImpact.mp3");
+    soundsImported[SHOOT] = LoadSound("resources/Sounds/Shoot.mp3");
+    soundsImported[START_GAME] = LoadSound("resources/Sounds/StartGame.mp3");
+
     // Setup and init first screen
     ScreenState = &ScreenLogoState::getInstance();
     ScreenState->InitScreen();
-     
 }
 
 Font& GameManager::GetFont(InportedFontType fontType)
 {
-    if (fontType == InportedFontType::pacman) return font;
-    else if (fontType == InportedFontType::pixel) return pixelFont;
+    if (fontType == InportedFontType::PACMAN) return font;
+    else if (fontType == InportedFontType::PIXEL) return pixelFont;
     else return font;
 }
 //-------------------------------------------------------
@@ -83,7 +90,7 @@ void GameManager::UpdateFrame(float deltaTime)
                         TransitionToScreen((int)ScreenState::GAMEPLAY);
                         ScreenState = &ScreenGameplayState::getInstance();
                         score = 0;
-                        lifes = 3;
+                        lives = 3;
                     }
                 }
 
@@ -170,8 +177,7 @@ void GameManager::UnloadGame(void)
     // Unload global data loaded
     UnloadFont(font);
     UnloadFont(pixelFont);
-    UnloadMusicStream(music);
-    UnloadSound(fxCoin);
+    for (int i = 0; i < MAX; i++) UnloadSound(soundsImported[i]);
 
     CloseAudioDevice();     // Close audio context
 }
@@ -247,8 +253,8 @@ void GameManager::ClearGameVar()
 {
     score = 0;
     seconds = 0;
-    
-
 }
 
-
+void GameManager::Play(Sounds sound) {
+    PlaySound(soundsImported[sound]);
+}

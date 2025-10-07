@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.h"
-
+#include "Game/Managers/GameManager.h"
 
 class Enemy : public Entity {
 public:
@@ -22,9 +22,9 @@ public:
 protected:
 	Texture2D sprite;
 	EnemyType enemyType;
+	GameManager::Sounds sound;
 
-	float vel = 5;
-	int lifes;
+	int lives;
 	int points;
 };
 
@@ -35,4 +35,6 @@ public:
 
 	void Init();
 	void Update();
+public:
+	bool shoot = false;
 };

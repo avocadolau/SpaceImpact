@@ -28,7 +28,7 @@ void ScreenTitleState::InitScreen(void)
 	UnloadImage(titleImage);
 
 	titlex = GetScreenWidth() / 2 - title.width / 2;
-	titley = GetScreenHeight() / 2 - title.height;
+	titley = 30;
 	
 }
 
@@ -83,7 +83,7 @@ void ScreenTitleState::DrawScreen(void)
 		DrawTextEx(GameInst.GetFont(), " by Laura I.", Vector2{ posx, 450.f }, 20, 4, WHITE);
 
 		posx = ((GetScreenWidth() / 2.f) - (MeasureText("Press Enter for Playing", 20) / 2.f));
-		DrawTextEx(GameInst.GetFont(InportedFontType::pixel), "PRESS ENTER FOR PLAYING", Vector2{ posx,500.f }, 25,4, Fade(WHITE, alpha));
+		DrawTextEx(GameInst.GetFont(InportedFontType::PIXEL), "PRESS ENTER FOR PLAYING", Vector2{ posx,500.f }, 25,4, Fade(WHITE, alpha));
 
 		//DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 500, 25, Fade(WHITE,alpha));
 		DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 560, 25, WHITE);

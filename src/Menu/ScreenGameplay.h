@@ -7,6 +7,8 @@
 #include "Game/Entities/Shoot.h"
 #include "Game/Entities/Enemy.h"
 
+#define SPAWN_RATE 90
+
 class ScreenGameplayState : public StateMachineMngr
 {
 public:
@@ -30,10 +32,10 @@ private:
 	ScreenGameplayState(const ScreenGameplayState& other);
 	ScreenGameplayState& operator= (const ScreenGameplayState& other);
 
+	void SpawnEnemies();
 	void CheckCollisions();
-
 	void EvaluateInput();
-	
+
 	void DebugOptions();
 	void DrawDebug();
 
@@ -45,11 +47,13 @@ private:
 	bool debug_stairs = false;
 
 	int shootCooldown = 0;
+	int enemiesSpawnState = 0;
 
 	Texture2D landscape;
-	Rectangle bounds;
+	Texture2D heart;
 	
 	Player* player = nullptr;
+	Boss* boss = nullptr;
 	std::vector<Entity*> entities;
 	bool matrix[CollisionType::MAX][CollisionType::MAX];
 };
